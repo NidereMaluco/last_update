@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhv40r6dkper6"]
+
+[ext_resource type="Script" path="res://prefabs/hud.gd" id="1_fe4e3"]
+[ext_resource type="FontFile" uid="uid://cwbt2ugsjq30h" path="res://font/Dihil.ttf" id="1_q81sh"]
+[ext_resource type="StyleBox" uid="uid://5o2tw8rpy5md" path="res://btn_style.tres" id="2_hh5fd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0c1a"]
+bg_color = Color(0.297902, 0.0517068, 0.480162, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwhbf"]
+bg_color = Color(0.52549, 0.25098, 0.937255, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="InputEventAction" id="InputEventAction_5cr36"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_waqum"]
+events = [SubResource("InputEventAction_5cr36")]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_fe4e3")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 53.0
+offset_right = 22.0
+offset_bottom = 117.0
+grow_horizontal = 2
+theme_override_constants/shadow_offset_x = -10
+theme_override_fonts/font = ExtResource("1_q81sh")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -99.0
+offset_right = 1.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/shadow_offset_x = -10
+theme_override_fonts/font = ExtResource("1_q81sh")
+theme_override_font_sizes/font_size = 64
+text = "Rafael Lucas Melo Peruci"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -97.0
+offset_right = 29.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_hover_color = Color(0.878431, 0.764706, 0.176471, 1)
+theme_override_colors/font_pressed_color = Color(0.878431, 0.764706, 0.176471, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_q81sh")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = ExtResource("2_hh5fd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i0c1a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kwhbf")
+theme_override_styles/normal = ExtResource("2_hh5fd")
+shortcut = SubResource("Shortcut_waqum")
+text = "Start
+"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
